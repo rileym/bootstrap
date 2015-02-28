@@ -1,6 +1,6 @@
 # bootstrap
 
-  I wrote this demo — based off a question an engineering friend asked me — for a class I TAed at Stanford. At that time I had access to Matlab and its optimization module. NB: I no longer have access to Matlab (the `fmincon` function, in particular, which Octave does not yet have) and cannot test the demo nor produce the plots.
+  I wrote this demo — based off a question an engineering friend asked me — for a class I TAed at Stanford. At that time I had access to Matlab and its optimization module. Unfortunately, I no longer have access to Matlab (the `fmincon` function, in particular, which Octave does not yet have) and cannot test the demo nor produce the plots anymore.
 
 ### Demo Background and Set-Up
 
@@ -11,7 +11,7 @@
 1. an estimate the (lower bound) process capability index (below denoted `C_pl`, where `C_pl =  ( mu_hat - LSL ) / 3 sigma_hat` ) 
 2. a confidence interval for this estimate
 
-As an additional complication of the exercise, we take the process output data to be right censored. (This complication was actually an aspect of my engineering friend’s question: the device she used to *measure* the process output had a maximum reading that was equaled or surpassed by a number of the output data.) The difficulty of the exercise is thus twofold: firstly, how to compute the estimated mean and variance for the *underlying* process output when you only have access to the right censored reading; and secondly, how to compute a confidence interval for the one-sided process capability index.
+As an additional complication of the exercise, we take the process output data to be right censored. (This complication was actually an aspect of my engineering friend’s question: the device she used to measure the process output had a maximum reading that was equaled or surpassed by a number of the output data.) The difficulty of the exercise is thus twofold: firstly, how to compute the estimated mean and variance for the *underlying* process output (as opposed to the reported output, which is censored) when you only have access to the right censored reading; and secondly, how to compute a confidence interval for the one-sided process capability index.
 
 ### Estimating the Capability Index — MLE
   
@@ -21,4 +21,4 @@ As an additional complication of the exercise, we take the process output data t
 
 ### Computing a Confidence Interval — Bootstrap
 
-  With a MLE procedure in hand we can produce point estimates of mu, sigma, and `C_pl`. How then to produce confidence intervals? — with the parametric bootstrap. Using the MLE estimates of `mu` and `sigma^2` to estimate the underlying process output distribution, we generate N bootstrapped samples of right censored data, and for each sample, we again estimate `mu`, `sigma`, and `C_pl` using the above procedure. With those bootstrapped estimates, we get a sense of our estimating procedure’s sensitivity to the idiosyncrasies of the particular sample to which it is applied. A precise confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here focus on `C_pl`) is the interval centered at the original MLE estimate (before bootstrapping) for `C_pl` with upper and lower bounds at a distance `l_95` from the center, where `l_95` is the 95th percentile absolute deviation of the bootstrapped estimates of `C_pl` to the original estimate of `C_pl`.
+  With a MLE procedure in hand we can produce point estimates of `mu`, `sigma`, and `C_pl`. How then to produce confidence intervals? — with the parametric bootstrap. Using the MLE estimates of `mu` and `sigma^2` to estimate the underlying process output distribution, we generate N bootstrapped samples of right censored data, and for each sample, we again estimate `mu`, `sigma`, and `C_pl` using the above procedure. With those bootstrapped estimates, we get a sense of our estimating procedure’s sensitivity to the idiosyncrasies of the particular sample to which it is applied. A precise confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) is the interval centered at the original MLE estimate (before bootstrapping) for `C_pl` with upper and lower bounds at a distance `l_95` from the center, where `l_95` is the 95th percentile absolute deviation of the bootstrapped estimates of `C_pl` to the original estimate of `C_pl`.
