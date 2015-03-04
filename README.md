@@ -36,11 +36,11 @@ With the above MLE procedure in hand we are able to produce point estimates of `
 * Using the MLE estimates of `mu` and `sigma^2` produced in the previous step, we take a normal distribution with those parameters as a stand-in for the “true” (and unknown) underlying process output distribution. 
 * From this distribution we draw and right-censor `N` (some large number) *bootstrapped* sample sets of right censored data. For each of these generated sample sets, we can again estimate a `mu`, a `sigma`, and a `C_pl` using our MLE procedure. 
 
-* Then, by examining the spread of those `N` *bootstrapped* estimates we can gain both a qualitative and quantitative sense of estimating procedure’s sensitivity to the particular idiosyncrasies of the sample sets to which it is applied.
+* Then, by examining the spread of those `N` *bootstrapped* estimates we can gain both a qualitative and quantitative sense of our estimating procedure’s sensitivity to the idiosyncrasies of the sample sets to which it is applied.
 
  * Qualitative: our estimating with, say, a histogram, we get a qualitative sense of our  In other words, we get a qualitative idea of the precision of our original point estimates.
 
 ![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
 
- * Quantitative: we compute a confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) from the `N` bootstrapped estimate. The interval centered at the original MLE estimate (before bootstrapping) for `C_pl` with upper and lower bounds at a distance `l_95` from the center, where `l_95` is the 95th percentile absolute deviation of the bootstrapped estimates of `C_pl` to the original estimate of `C_pl`.
+ * Quantitative: we may compute a confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) from the `N` bootstrapped estimates as follows. The interval is centered at the *original* MLE point estimate for `C_pl` with upper and lower bounds at a distance `l_95` from this center, where `l_95` is the 95th percentile absolute deviation of the *bootstrapped* estimates of `C_pl` from the *original* estimate of `C_pl`.
 
