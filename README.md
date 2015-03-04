@@ -33,9 +33,12 @@ Given this likelihood expression, we need only to maximize it (or, rather, its l
 
 With the above MLE procedure in hand we are able to produce point estimates of `mu`, `sigma`, and `C_pl` from our right-censored process output data. How then do we to produce confidence intervals for our point estimates? The answer: with the parametric bootstrap. 
 
-Using the MLE estimates of `mu` and `sigma^2` produced in the previous step, we take a normal distribution with those parameters as a stand-in for the “true” (and unknown) underlying process output distribution. From this distribution we may now draw and right-censor `N` (some large number) *bootstrapped* sample sets of right censored data. For each of these generated sample sets, we can again estimate a `mu`, a `sigma`, and a `C_pl` using our MLE procedure. Then, by examining the spread of those `N` *bootstrapped* estimates with, say, a histogram, we get a qualitative sense of our estimating procedure’s sensitivity to the particular idiosyncrasies of the sample sets to which it is applied. In other words, we get a qualitative idea of the precision of out original point estimates.
+* Using the MLE estimates of `mu` and `sigma^2` produced in the previous step, we take a normal distribution with those parameters as a stand-in for the “true” (and unknown) underlying process output distribution. 
+* From this distribution we may now draw and right-censor `N` (some large number) *bootstrapped* sample sets of right censored data. For each of these generated sample sets, we can again estimate a `mu`, a `sigma`, and a `C_pl` using our MLE procedure. 
+
+Then, by examining the spread of those `N` *bootstrapped* estimates with, say, a histogram, we get a qualitative sense of our estimating procedure’s sensitivity to the particular idiosyncrasies of the sample sets to which it is applied. In other words, we get a qualitative idea of the precision of our original point estimates.
 
 ![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
 
-To produce a concrete confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) is the interval centered at the original MLE estimate (before bootstrapping) for `C_pl` with upper and lower bounds at a distance `l_95` from the center, where `l_95` is the 95th percentile absolute deviation of the bootstrapped estimates of `C_pl` to the original estimate of `C_pl`.
+To produce a quantitative measure of the accuracy of the point estimate, we compute a confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) from the `N` bootstrapped estimate. The interval centered at the original MLE estimate (before bootstrapping) for `C_pl` with upper and lower bounds at a distance `l_95` from the center, where `l_95` is the 95th percentile absolute deviation of the bootstrapped estimates of `C_pl` to the original estimate of `C_pl`.
 
