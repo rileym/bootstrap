@@ -1,4 +1,4 @@
-# bootstrap
+# Parametric Bootstrap Demo 
 
 I wrote this demo, inspired by a question an engineering friend asked me, for a probabilistic modeling class I was TAing at Stanford. 
 
