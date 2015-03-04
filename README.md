@@ -24,20 +24,18 @@ The difficulty of the exercise is thus twofold:
   
 To estimate the mean and variance of the underlying normal distribution, we compute the MLE. Of course, to do so we must first write out the likelihood of the right censored data as a function of the underlying mean, `mu`, and variance, `sigma^2`. With a little thought it becomes clear how to form the likelihood (and so too the log-likelihood) function: 
 * For each data point `x_i` *less than* the right censoring threshold, there is a corresponding `f_mu_theta(x_i)` term in the likelihood product, where `f_mu_theta` is the density function for a normal random variable with mean `mu` and variance `sigma^2`
-* For each data point `x_i` *equal to* the right censoring threshold (indicating that the associated true process output value was at least that large) there is a `1-F_mu_theta(x_i)` term in the likelihood product, where `F_mu_theta` is the CDF of a normal random variable with mean `mu` and variance `sigma^2`.
+* For each data point `x_i` *equal to* the right censoring threshold (indicating that the true process output value was at least that large) there is a `1-F_mu_theta(x_i)` term in the likelihood product, where `F_mu_theta` is the CDF of a normal random variable with mean `mu` and variance `sigma^2`.
 
 
-Given the likelihood expression, we need only to maximize the likelihood function (or, rather, its logarithm) over `mu` and `sigma^2` in order to produce point estimates for `mu`, `sigma^2`, and `C_pl`. Because the Normal dCDF cannot be expressed in closed form, we must maximize the (log) likelihood numerically. For this task I’ve used Matlab's `fmincon` (where the *con*straint is `sigma >= 0`).
+Given this likelihood expression, we need only to maximize it (or, rather, its logarithm) over `mu` and `sigma^2` in order to produce point estimates for `mu`, `sigma^2`, and `C_pl`. Since the Normal CDF cannot be expressed in closed form, we must maximize the (log) likelihood numerically. For this task I’ve used Matlab's `fmincon` (where the *con*straint is `sigma >= 0`).
 
 ### 2. Computing a Confidence Interval — Bootstrap
 
-With the above MLE procedure in hand we are able to produce point estimates of `mu`, `sigma`, and `C_pl` from a sample sets of right-censored process output. How then do we to produce confidence intervals for these point estimates? The answer: with the parametric bootstrap. 
+With the above MLE procedure in hand we are able to produce point estimates of `mu`, `sigma`, and `C_pl` from our right-censored process output data. How then do we to produce confidence intervals for our point estimates? The answer: with the parametric bootstrap. 
 
-Using the MLE estimates of `mu` and `sigma^2` produced in the previous step, we take a normal distribution with those parameters as a stand-in distribution underlying process output distribution from which we may draw new sample sets. Thus we drew `N` (some large number) of *bootstrapped* sample sets of right censored data. For each of these generated sample sets, we can again estimate a `mu`, a `sigma`, and a `C_pl` using our MLE procedure. Now, by examining the spread of those `N` *bootstrapped* estimates (as opposed to the *original* three point estimates), with, say, a histogram, we get a qualitative sense of our estimating procedure’s sensitivity to the particular idiosyncrasies of the sample sets to which it is applied. In other words, we get a qualitative idea of the precision of out original point estimates.
+Using the MLE estimates of `mu` and `sigma^2` produced in the previous step, we take a normal distribution with those parameters as a stand-in for the “true” (and unknown) underlying process output distribution. From this distribution we may now draw and right-censor `N` (some large number) *bootstrapped* sample sets of right censored data. For each of these generated sample sets, we can again estimate a `mu`, a `sigma`, and a `C_pl` using our MLE procedure. Then, by examining the spread of those `N` *bootstrapped* estimates with, say, a histogram, we get a qualitative sense of our estimating procedure’s sensitivity to the particular idiosyncrasies of the sample sets to which it is applied. In other words, we get a qualitative idea of the precision of out original point estimates.
 
 ![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
-
-***rewrite below***
 
 To produce a concrete confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) is the interval centered at the original MLE estimate (before bootstrapping) for `C_pl` with upper and lower bounds at a distance `l_95` from the center, where `l_95` is the 95th percentile absolute deviation of the bootstrapped estimates of `C_pl` to the original estimate of `C_pl`.
 
