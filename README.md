@@ -4,6 +4,8 @@ I wrote this demo, inspired by a question an engineering friend asked me, for a 
 
 **Unfortunately, I no longer have access to Matlab (the `fmincon` function, in particular, which Octave does not yet have) and cannot test the demo nor produce new plots anymore.**
 
+______________________________________________________________________
+
 ### Demo Background and Set-Up
 
   [Process capability indices](http://en.wikipedia.org/wiki/Process_capability_index) measure the “safety” or margin-for-error of engineering processes. They compare allowable process output error — i.e. deviation from some target value — to the estimated variation of that output. That is likely a crude characterization, but for the purposes of the demo it is enough to understand the process capability index as a statistic determined by the estimated mean and variance of the (assumed to be normally distributed) process output.
