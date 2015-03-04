@@ -10,15 +10,14 @@ I wrote this demo, inspired by a question an engineering friend asked me, for a 
 
 The goal of the exercise is to take process output data and produce:
 
-**1.** An estimate of the (lower bound) process capability index (below denoted `C_pl`, where `C_pl =  ( mu_hat - LSL ) / ( 3 sigma_hat )` ) 
-**2.** A confidence interval for this estimate
+* An estimate of the (lower bound) process capability index (below denoted `C_pl`, where `C_pl =  ( mu_hat - LSL ) / ( 3 sigma_hat )` ) 
+* A confidence interval for this estimate
 
 As an additional complication of the exercise, our process output data is right censored. (This complication was actually an element of my engineering friend’s question; the device she used to measure the process output had a maximum reading that was equaled (or surpassed) by a portion of the output values.) 
 
 The difficulty of the exercise is thus twofold:
 
 1. How to compute the estimated mean and variance for the *underlying* process output (as opposed to the reported output, which is censored) with access only to the right censored readings?
-
 2. How to compute a confidence interval for the resultant process capability index point estimate?
 
 ### 1. Estimating the Process Capability Index — MLE
