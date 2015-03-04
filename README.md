@@ -17,7 +17,8 @@ As an additional complication of the exercise, our process output data is right 
 
 The difficulty of the exercise is thus twofold:
 
-1. How to compute the estimated mean and variance for the *underlying* process output (as opposed to the reported output, which is censored) with access only to the right censored readings?
+3. How to compute the estimated mean and variance for the *underlying* process output (as opposed to the reported output, which is censored) with access only to the right censored readings?
+
 2. How to compute a confidence interval for the resultant process capability index point estimate?
 
 ### 1. Estimating the Process Capability Index — MLE
