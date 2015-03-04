@@ -44,8 +44,8 @@ With the above MLE procedure in hand we are able to produce point estimates of `
 
  * For a quantitative measure of the accuracy of  we compute a confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) from the `N` bootstrapped estimates. The interval is centered at the *original* MLE point estimate for `C_pl` with upper and lower bounds at a distance `l_95` from this center, where `l_95` is the 95th percentile absolute deviation of the *bootstrapped* estimates of `C_pl` from the *original* estimate of `C_pl`.
 
+______________________________________________________________________
 
-
-Below is an example histogram of bootstrapped `C_pl` estimates I must have produced before I lost access to the Stanford network.
+Below is an example histogram of bootstrapped `C_pl` estimates. I must have produced this before I lost access to the Stanford network.
  
 ![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
