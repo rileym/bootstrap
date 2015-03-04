@@ -44,6 +44,6 @@ With the above MLE procedure in hand we are able to produce point estimates of `
 
 
 
-Below is an example histogram produced before I lost access to the Stanford network.
+Below is an example histogram of bootstrapped `C_pl` estimates I must have produced before I lost access to the Stanford network.
  
 ![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
