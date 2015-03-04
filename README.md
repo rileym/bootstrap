@@ -40,7 +40,6 @@ With the above MLE procedure in hand we are able to produce point estimates of `
 
  * Qualitative: our estimating with, say, a histogram, we get a qualitative sense of our  In other words, we get a qualitative idea of the precision of our original point estimates.
 
-![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
-
  * Quantitative: we may compute a confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) from the `N` bootstrapped estimates as follows. The interval is centered at the *original* MLE point estimate for `C_pl` with upper and lower bounds at a distance `l_95` from this center, where `l_95` is the 95th percentile absolute deviation of the *bootstrapped* estimates of `C_pl` from the *original* estimate of `C_pl`.
 
+![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
