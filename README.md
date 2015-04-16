@@ -1,25 +1,25 @@
 # Parametric Bootstrap Demo 
 
-I wrote this demo, inspired by a question an engineering friend asked me, for a probabilistic modeling class I was TAing at Stanford. 
+I wrote this demo, inspired by a question an engineering friend asked me, for a probabilistic modeling class I TAed at Stanford. 
 
-**Unfortunately, I no longer have access to Matlab (the `fmincon` function, in particular, which Octave does not yet have) and cannot test the demo nor produce new plots anymore.**
+**Unfortunately, I no longer have access to Matlab (to the `fmincon` function, in particular, which Octave does not have) and cannot test the demo nor produce new plots anymore.**
 
 ______________________________________________________________________
 
 ### Demo Background and Set-Up
 
-  [Process capability indices](http://en.wikipedia.org/wiki/Process_capability_index) measure the “safety” or margin-for-error of engineering processes. They compare allowable process output error — i.e. deviation from some target value — to the estimated variation of that output. That is likely a crude characterization, but for the purposes of the demo it is enough to understand the process capability index as a statistic determined by the estimated mean and variance of the (assumed to be normally distributed) process output.
+[Process capability indices](http://en.wikipedia.org/wiki/Process_capability_index) measure the “safety” or margin-for-error of engineering processes. They compare allowable process output error — i.e. deviation from some target value — to the estimated variation of that process output. That might be an oversimplificaion, but for the purposes of the demo it is enough to understand the process capability index as a statistic determined by the estimated mean and variance of the (assumed to be normally distributed) process output.
 
 The goal of the exercise is to take process output data and produce:
 
 * An estimate of the (lower bound) process capability index (below denoted `C_pl`, where `C_pl =  ( mu_hat - LSL ) / ( 3 sigma_hat )` ) 
 * A confidence interval for this estimate
 
-As an additional complication of the exercise, our process output data is right censored. (This complication was actually an element of my engineering friend’s question; the device she used to measure the process output had a maximum reading that was equaled (or surpassed) by a portion of the output values.) 
+As an additional complication of the exercise, our process output data is right censored. (This complication was actually an element of my engineering friend’s question: the device she used to measure the process output had a maximum reading that was equaled (or surpassed) by a portion of the output values.) 
 
 The difficulty of the exercise is thus twofold:
 
-1. How to compute the estimated mean and variance for the *underlying* process output (as opposed to the reported output, which is censored) with access only to the right censored readings?
+1. How to compute the estimated mean and variance for the *underlying* process output (as opposed to the reported, censored output) with access only to the right censored readings?
 2. How to compute a confidence interval for the resultant process capability index point estimate?
 
 ### 1. Estimating the Process Capability Index — MLE
@@ -33,19 +33,19 @@ Given this likelihood expression, we need only to maximize it (or, rather, its l
 
 ### 2. Computing a Confidence Interval — Bootstrap
 
-With the above MLE procedure in hand we are able to produce point estimates of `mu`, `sigma`, and `C_pl` from our right-censored process output data. How then do we to produce confidence intervals for our point estimates? The answer: with the parametric bootstrap. Here is the basic method: 
+With the above MLE procedure in hand we are able to produce point estimates of `mu`, `sigma`, and `C_pl` from our right-censored process output data. How then do we to produce confidence intervals for our point estimates? – the parametric bootstrap. Here is the basic method: 
 
 * Using the MLE estimates of `mu` and `sigma^2` produced in the previous step, we take a normal distribution with those parameters as a stand-in for the “true” (and unknown) underlying process output distribution. 
 * From this distribution we draw and right-censor `N` (some large number) *bootstrapped* sample sets of right censored data. For each of these generated sample sets, we can again estimate a `mu`, a `sigma`, and a `C_pl` using our MLE procedure. 
 
 * Then, by examining the spread of those `N` *bootstrapped* estimates we can gain both a qualitative and quantitative sense of our estimating procedure’s sensitivity to the idiosyncrasies of the sample sets to which it is applied.
 
- * For a qualitative sense of the spread we visualize the spread with a histogram.
+ * For a qualitative sense of the sampling distribution, we visualize the spread with a histogram.
 
  * For a quantitative measure of the accuracy of  we compute a confidence interval of say, 95%, (computed for `mu`, `sigma`, or `C_pl`, but here let’s focus on `C_pl`) from the `N` bootstrapped estimates. The interval is centered at the *original* MLE point estimate for `C_pl` with upper and lower bounds at a distance `l_95` from this center, where `l_95` is the 95th percentile absolute deviation of the *bootstrapped* estimates of `C_pl` from the *original* estimate of `C_pl`.
 
 ______________________________________________________________________
 
-Below is an example histogram of bootstrapped `C_pl` estimates. I must have produced this before I lost access to the Stanford network.
+Below is an example histogram (estimated sampling distribution) of bootstrapped `C_pl` estimates. I must have produced this before I lost access to the Stanford network.
  
 ![atl text](https://github.com/rileym/bootstrap/blob/master/bootstrappedCPlestimates.jpg)
